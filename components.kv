@@ -1,0 +1,44 @@
+<blue_ball>
+    siz : 30, 30
+    canvas:
+        Color: 
+            rgba: 1, 0, 0, 1
+        Ellipse:
+            pos: self.pos
+            size: self.siz
+
+
+
+<ball>:
+    siz : 30, 30
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size: self.siz
+
+
+<main>:
+
+    ball_1: ball_1
+    ball_2: ball_2
+    blue_ball_1 : blue_ball_1
+
+    Label: 
+        font_size : 0
+        center_x: root.center_x - 4
+        center_y: root.height - 50
+        text: "0"
+
+
+    ball:
+        id : ball_1
+        center: self.parent.center
+
+    ball:
+        id: ball_2
+        x : root.center_x/2
+
+
+    blue_ball: 
+        id: blue_ball_1
+        x : root.center_x/2 + 80
