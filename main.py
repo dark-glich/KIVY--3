@@ -13,7 +13,7 @@ class blue_ball(Widget):
     def move(self):
         self.pos = Vector(*self.velocity) + self.pos
 
-class ball(Widget):
+class red_ball(Widget):
     kivy.lang.Builder.load_file("components.kv")
     velocity_x = kivy.properties.NumericProperty(0)
     velocity_y = kivy.properties.NumericProperty(0)
@@ -28,9 +28,9 @@ class main(Widget):
     blue_ball_1 = kivy.properties.ObjectProperty(None)
 
     def start(self):
-        self.ball_1.velocity = Vector(0, 4)
-        self.ball_2.velocity = Vector(0, 8)
-        self.blue_ball_1.velocity = Vector(0, 2)
+        self.ball_1.velocity = Vector(0, 3)
+        self.ball_2.velocity = Vector(0, 3)
+        self.blue_ball_1.velocity = Vector(0, 3)
         
 
     def update(self, td):
