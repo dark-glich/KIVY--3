@@ -21,9 +21,17 @@
 
 <main>:
 
-    ball_1: ball_1
-    ball_2: ball_2
+    red_ball_1: red_ball_1
+    red_ball_2: red_ball_2
+    red_ball_3: red_ball_3
+    red_ball_4: red_ball_4
+    red_ball_5: red_ball_5
+
     blue_ball_1 : blue_ball_1
+    blue_ball_2 : blue_ball_2
+    blue_ball_3 : blue_ball_3
+    blue_ball_4 : blue_ball_4
+    blue_ball_5 : blue_ball_5
 
     canvas: 
         Color:
@@ -48,26 +56,55 @@
     # right side balls
 
     red_ball:
-        id : ball_1
+        id : red_ball_1
         x : 3/4 *root.width
         y : (root.center_y/2 )* -1
+
+    blue_ball: 
+        id: blue_ball_1
+        x : 3/4 *root.width
+        y : (root.center_y/2 + 200)* -1
+
+    red_ball:
+        id : red_ball_2
+        x : 3/4 *root.width
+        y : (root.center_y/2 + 400)* -1
+
+    blue_ball: 
+        id: blue_ball_2
+        x : 3/4 *root.width
+        y : (root.center_y/2 + 600)* -1
+
+    red_ball:
+        id : red_ball_3
+        x : 3/4 *root.width
+        y : (root.center_y/2 + 800)* -1
 
     # left side balls
 
     blue_ball: 
-        id: blue_ball_1
+        id: blue_ball_3
         x : root.center_x/4
         y : (root.center_y/2 )* -1
 
     red_ball:
-        id: ball_2
+        id: red_ball_4
         x : root.center_x/4
-        y : (root.center_y/2 + 100)* -1
+        y : (root.center_y/2 + 200)* -1
 
     blue_ball: 
-        id: blue_ball_1
+        id: blue_ball_4
         x : root.center_x/4
-        y : (root.center_y/2 )* -1
+        y : (root.center_y/2 + 400)* -1
 
+    red_ball:
+        id: red_ball_5
+        x : root.center_x/4
+        y : (root.center_y/2 + 600)* -1
+
+    blue_ball: 
+        id: blue_ball_5
+        x : root.center_x/4
+        y : (root.center_y/2 + 800)* -1
 
 
