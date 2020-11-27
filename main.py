@@ -37,10 +37,8 @@ class main(Widget):
     blue_ball_3 = kivy.properties.ObjectProperty(None)
     blue_ball_4 = kivy.properties.ObjectProperty(None)
     blue_ball_5 = kivy.properties.ObjectProperty(None)
-    lane = "right"
 
-    red_ball_1_lane = "right"
-
+    score = kivy.properties.NumericProperty(0)
 
     def start(self):
         balls = [self.red_ball_1, self.red_ball_2, self.red_ball_3, self.red_ball_4, 
@@ -48,7 +46,7 @@ class main(Widget):
         self.blue_ball_5]
 
         for i in balls:
-            i.velocity = Vector(0, 3)
+            i.velocity = Vector(0, 1.5)
 
         
     def update(self, td):
@@ -57,18 +55,34 @@ class main(Widget):
         self.red_ball_5, self.blue_ball_1, self.blue_ball_2, self.blue_ball_3, self.blue_ball_4, 
         self.blue_ball_5]
 
+
         for i in balls:
             i.move()
+            if i.center_x <= 0 or i.center_x >= self.width or i.center_y >= self.height:
+                i.center_x = random.choice([150.0, 650.0])
+                i.center_y = -200
+                i.velocity = Vector(0, 1.5)
+        for a in balls:
+            for b in balls:
+                if a != b:
+                    deff = a.center_y - b.center_y
+                    if deff < 90 and deff > 0:
+                        a.center_x = random.choice([150.0, 650.0])
+                        a.center_y = -200
+                        a.velocity = Vector(0, 1.5)
 
-        if self.red_ball_1.center_x <= 0 or self.red_ball_1.center_x >= self.width:
-            self.red_ball_1.center_x = random.choice([150.0, 650.0])
-            self.red_ball_1.center_y = -100
-            self.red_ball_1.velocity = Vector(0, 3)
+        wide = self.width - 20
+        if self.red_ball_1.center_x > wide or self.red_ball_2.center_x > wide or self.red_ball_3.center_x > wide or self.red_ball_4.center_x > wide or self.red_ball_5.center_x > wide :
+            self.score -= 1
 
-        if self.red_ball_1.center_x == 150.0:
-            self.red_ball_1_lane = "left"
-        else:
-            self.red_ball_1_lane = "right"
+        if self.blue_ball_1.center_x < 20 or self.blue_ball_2.center_x < 20 or self.blue_ball_3.center_x < 20 or self.blue_ball_4.center_x < 20 or self.blue_ball_5.center_x < 20 :
+            self.score -= 1
+
+        if self.red_ball_1.center_x < 20 or self.red_ball_2.center_x < 20 or self.red_ball_3.center_x < 20 or self.red_ball_4.center_x < 20 or self.red_ball_5.center_x < 20 :
+            self.score += 1
+
+        if self.blue_ball_1.center_x > wide or self.blue_ball_2.center_x > wide or self.blue_ball_3.center_x > wide or self.blue_ball_4.center_x > wide or self.blue_ball_5.center_x > wide :
+            self.score += 1
        
     def on_touch_move(self, touch):
 
@@ -78,20 +92,20 @@ class main(Widget):
 
         for i in balls:
             deff = math.sqrt((touch.x - i.center_x) ** 2 + (touch.y - i.center_y) ** 2)
-            if deff <= 150:
+            if deff <= 90:
                 i.center_x = touch.x
 
-        if self.red_ball_1.center_x >= 500 and self.red_ball_1.center_x <= 630:
-            self.red_ball_1.velocity_x = -15
+            if i.center_x >= 300 and i.center_x <= 630:
+                i.velocity_x = -15
 
-        if self.red_ball_1.center_x >= 670:
-            self.red_ball_1.velocity_x = 15
+            if i.center_x >= 670:
+                i.velocity_x = 15
 
-        if self.red_ball_1.center_x <= 130:
-            self.red_ball_1.velocity_x = -15
+            if i.center_x <= 130:
+                i.velocity_x = -15
 
-        if self.red_ball_1.center_x >= 180 and self.red_ball_1.center_x <= 400:
-            self.red_ball_1.velocity_x = 15
+            if i.center_x >= 160 and i.center_x <= 370:
+                i.velocity_x = 15
 
 
 class app(App):
