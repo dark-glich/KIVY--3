@@ -46,12 +46,25 @@
             pos: root.width - 5, 30
             size: 4, root.height - 60
 
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle: 
+            pos: 0, root.height - 30
+            size: root.width, 500
+            source: "finishline.jpg"
+
 
     Label: 
         font_size : 30
         center_x: root.center_x - 4
         center_y: root.height - 50
         text: str(root.score)
+
+    Label: 
+        font_size : int(root.font)
+        center_x: root.center_x - 4
+        center_y: root.center_y - 2
+        text: "Game Over"
 
     # right side balls
 

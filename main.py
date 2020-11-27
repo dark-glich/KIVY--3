@@ -39,6 +39,7 @@ class main(Widget):
     blue_ball_5 = kivy.properties.ObjectProperty(None)
 
     score = kivy.properties.NumericProperty(0)
+    font = kivy.properties.NumericProperty(0)
 
     def start(self):
         balls = [self.red_ball_1, self.red_ball_2, self.red_ball_3, self.red_ball_4, 
@@ -62,27 +63,26 @@ class main(Widget):
                 i.center_x = random.choice([150.0, 650.0])
                 i.center_y = -200
                 i.velocity = Vector(0, 1.5)
+            if i.center_y >= self.height - 30:
+                i.center_y = self.height/4 * -1
+                i.velocity = Vector(0, 0)
+                self.score += 1
+                if self.score >= 10:
+                    self.font = 34
+                    for i in balls:
+                        i.center_y = -200
+                        i.velocity = Vector(0,0)
+                    
+
         for a in balls:
             for b in balls:
                 if a != b:
                     deff = a.center_y - b.center_y
                     if deff < 90 and deff > 0:
-                        a.center_x = random.choice([150.0, 650.0])
+                        a.center_x = random.choice([self.width/4 -50 , self.width * 3/4 + 50])
                         a.center_y = -200
                         a.velocity = Vector(0, 1.5)
 
-        wide = self.width - 20
-        if self.red_ball_1.center_x > wide or self.red_ball_2.center_x > wide or self.red_ball_3.center_x > wide or self.red_ball_4.center_x > wide or self.red_ball_5.center_x > wide :
-            self.score -= 1
-
-        if self.blue_ball_1.center_x < 20 or self.blue_ball_2.center_x < 20 or self.blue_ball_3.center_x < 20 or self.blue_ball_4.center_x < 20 or self.blue_ball_5.center_x < 20 :
-            self.score -= 1
-
-        if self.red_ball_1.center_x < 20 or self.red_ball_2.center_x < 20 or self.red_ball_3.center_x < 20 or self.red_ball_4.center_x < 20 or self.red_ball_5.center_x < 20 :
-            self.score += 1
-
-        if self.blue_ball_1.center_x > wide or self.blue_ball_2.center_x > wide or self.blue_ball_3.center_x > wide or self.blue_ball_4.center_x > wide or self.blue_ball_5.center_x > wide :
-            self.score += 1
        
     def on_touch_move(self, touch):
 
@@ -92,21 +92,20 @@ class main(Widget):
 
         for i in balls:
             deff = math.sqrt((touch.x - i.center_x) ** 2 + (touch.y - i.center_y) ** 2)
-            if deff <= 90:
+            if deff <= self.width/8 + 3:
                 i.center_x = touch.x
 
-            if i.center_x >= 300 and i.center_x <= 630:
+            if i.center_x >= self.width/2 - 100 and i.center_x <= self.width * 3/4 + 30:
                 i.velocity_x = -15
 
-            if i.center_x >= 670:
+            if i.center_x >= self.width * 3/4 + 70:
                 i.velocity_x = 15
 
-            if i.center_x <= 130:
+            if i.center_x <= self.width/4 - 70:
                 i.velocity_x = -15
 
-            if i.center_x >= 160 and i.center_x <= 370:
+            if i.center_x >= self.width/4 - 40 and i.center_x <= self.width/2:
                 i.velocity_x = 15
-
 
 class app(App):
     def build(self):
